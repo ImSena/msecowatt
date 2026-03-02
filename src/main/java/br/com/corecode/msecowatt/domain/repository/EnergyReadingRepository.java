@@ -9,11 +9,11 @@ import java.util.Optional;
 public interface EnergyReadingRepository {
 
     EnergyReading save(EnergyReading energyReading);
-    Optional<EnergyReading> findById(Long id);
+    Optional<EnergyReading> findById(String id);
     List<EnergyReading> findAll();
-    void delete(EnergyReading energyReading);
+    void delete(String id);
 
-    List<EnergyReading> findByCompanyId(Long comapanyId);
-    List<EnergyReading> findByPeriod(Long companyId, LocalDate start, LocalDate end);
+    List<EnergyReading> findByCompanyId(String comapanyId);
+    List<EnergyReading> findByPeriod(String companyId, LocalDate start, LocalDate end);
 
 }

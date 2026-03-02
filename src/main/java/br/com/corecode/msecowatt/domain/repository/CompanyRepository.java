@@ -8,7 +8,8 @@ import java.util.Optional;
 public interface CompanyRepository {
 
     Company save(Company company);
-    Optional<Company> findById(Long id);
+    Optional<Company> findById(String id);
+    Optional<Company> findByCnpj(String cnpj);
     List<Company> findAll();
-    void delete(Long id);
+    void delete(String id);
 }
