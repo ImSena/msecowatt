@@ -7,12 +7,12 @@ import br.com.corecode.msecowatt.domain.valueObject.Location;
 import java.time.LocalDateTime;
 
 public class Company {
-    private final String id;
+    private String id;
     private final String name;
     private final Cnpj cnpj;
     private final Location location;
     private final String phoneNumber;
-    private final LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     public Company(String id, String name, Cnpj cnpj, Location location, String phoneNumber) {
         if(name == null || name.isEmpty()){
@@ -25,6 +25,19 @@ public class Company {
         this.location = location;
         this.phoneNumber = phoneNumber;
         this.createdAt = LocalDateTime.now();
+    }
+
+    public static Company restore(
+            String id,
+            String name,
+            Cnpj cnpj,
+            Location location,
+            String phoneNumber,
+            LocalDateTime createdAt
+    ){
+        Company company = new Company(id, name, cnpj, location, phoneNumber);
+        company.createdAt = createdAt;
+        return company;
     }
 
     public String getId() {

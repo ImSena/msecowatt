@@ -12,7 +12,7 @@ public class EnergyReading {
     private final LocalDate readingDate;
     private final BigDecimal consumptionKwh;
     private BigDecimal emissionCo2;
-    private final LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     public EnergyReading(String companyId, LocalDate readingDate, BigDecimal consumptionKwh) {
         if(companyId == null){
@@ -36,6 +36,22 @@ public class EnergyReading {
         }
 
         return finalDate;
+    }
+
+    public static EnergyReading restore(
+            String id,
+            String companyId,
+            LocalDate readingDate,
+            BigDecimal consumptionKwh,
+            BigDecimal emissionCo2,
+            LocalDateTime createdAt
+
+    ){
+        EnergyReading reading = new EnergyReading(companyId, readingDate, consumptionKwh);
+        reading.id = id;
+        reading.emissionCo2 = emissionCo2;
+        reading.createdAt = createdAt;
+        return reading;
     }
 
     public void calculateEmission(BigDecimal factor){
