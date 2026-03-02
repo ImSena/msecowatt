@@ -2,10 +2,12 @@ package br.com.corecode.msecowatt.infrastructure.persistence.mongo.mapper;
 
 import br.com.corecode.msecowatt.domain.entity.EnergyReading;
 import br.com.corecode.msecowatt.infrastructure.persistence.mongo.document.EnergyReadingDocument;
+import org.springframework.stereotype.Component;
 
-public class EnergyReadingMapper {
+@Component
+public class EnergyMongoReadingMapper {
 
-    public static EnergyReadingDocument toDocument(EnergyReading entity){
+    public EnergyReadingDocument toDocument(EnergyReading entity){
         return new EnergyReadingDocument(
                 entity.getId(),
                 entity.getCompanyId(),
@@ -16,7 +18,7 @@ public class EnergyReadingMapper {
         );
     }
 
-    public static EnergyReading toEntity(EnergyReadingDocument document){
+    public EnergyReading toDomain(EnergyReadingDocument document){
         return EnergyReading.restore(
             document.getId(),
             document.getCompanyId(),

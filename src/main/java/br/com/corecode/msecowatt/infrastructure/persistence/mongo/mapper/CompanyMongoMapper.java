@@ -4,10 +4,12 @@ import br.com.corecode.msecowatt.domain.entity.Company;
 import br.com.corecode.msecowatt.domain.valueObject.Cnpj;
 import br.com.corecode.msecowatt.domain.valueObject.Location;
 import br.com.corecode.msecowatt.infrastructure.persistence.mongo.document.CompanyDocument;
+import org.springframework.stereotype.Component;
 
-public class CompanyMapper {
+@Component
+public class CompanyMongoMapper {
 
-    public static CompanyDocument toDocument(Company entity) {
+    public CompanyDocument toDocument(Company entity) {
         return new CompanyDocument(
                 entity.getId(),
                 entity.getName(),
@@ -20,7 +22,7 @@ public class CompanyMapper {
         );
     }
 
-    public static Company toEntity(CompanyDocument document) {
+    public Company toDomain(CompanyDocument document) {
         return Company.restore(
                 document.getId(),
                 document.getName(),

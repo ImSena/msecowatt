@@ -9,6 +9,7 @@ public interface CompanyRepository {
 
     Company save(Company company);
     Optional<Company> findById(String id);
+    Optional<Company> findByCnpj(String cnpj);
     List<Company> findAll();
     void delete(String id);
 }
