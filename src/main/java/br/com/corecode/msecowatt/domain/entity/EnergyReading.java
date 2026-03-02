@@ -7,14 +7,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class EnergyReading {
-    private Long id;
-    private final Long companyId;
+    private String id;
+    private final String companyId;
     private final LocalDate readingDate;
     private final BigDecimal consumptionKwh;
     private BigDecimal emissionCo2;
     private final LocalDateTime createdAt;
 
-    public EnergyReading(Long companyId, LocalDate readingDate, BigDecimal consumptionKwh) {
+    public EnergyReading(String companyId, LocalDate readingDate, BigDecimal consumptionKwh) {
         if(companyId == null){
             throw new InvalidDomainValueException("companyId cannot be null");
         }
@@ -42,11 +42,11 @@ public class EnergyReading {
         this.emissionCo2 = factor.multiply(consumptionKwh);
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public Long getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 

@@ -13,7 +13,7 @@ public interface EnergyReadingRepository {
     List<EnergyReading> findAll();
     void delete(EnergyReading energyReading);
 
-    List<EnergyReading> findByCompanyId(Long comapanyId);
+    List<EnergyReading> findByCompanyId(String comapanyId);
     List<EnergyReading> findByPeriod(Long companyId, LocalDate start, LocalDate end);
 
 }
