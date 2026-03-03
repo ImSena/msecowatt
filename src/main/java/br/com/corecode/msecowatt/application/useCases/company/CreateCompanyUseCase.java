@@ -1,6 +1,6 @@
 package br.com.corecode.msecowatt.application.useCases.company;
 
-import br.com.corecode.msecowatt.application.exceptions.ExistsRegister;
+import br.com.corecode.msecowatt.application.exceptions.AlreadyExistsRegisterException;
 import br.com.corecode.msecowatt.application.useCases.company.dto.CompanyOutput;
 import br.com.corecode.msecowatt.application.useCases.company.dto.CreateCompanyInput;
 import br.com.corecode.msecowatt.domain.entity.Company;
@@ -19,7 +19,7 @@ public class CreateCompanyUseCase {
     public CompanyOutput execute(CreateCompanyInput input) {
         repository.findByCnpj(input.cnpj())
                 .ifPresent(company -> {
-                    throw new ExistsRegister("Company with CNPJ already exists");
+                    throw new AlreadyExistsRegisterException("Company with CNPJ already exists");
                 });
 
         Cnpj cnpj = new Cnpj(input.cnpj());

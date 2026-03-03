@@ -3,11 +3,13 @@ package br.com.corecode.msecowatt.infrastructure.persistence.mongo.repository.en
 import br.com.corecode.msecowatt.domain.entity.EnergyReading;
 import br.com.corecode.msecowatt.domain.repository.EnergyReadingRepository;
 import br.com.corecode.msecowatt.infrastructure.persistence.mongo.mapper.EnergyMongoReadingMapper;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class EnergyReadingMongoRepositoryAdapter implements EnergyReadingRepository {
 
     private final SpringDataEnergyReadingMongoRepository repository;

@@ -1,6 +1,6 @@
 package br.com.corecode.msecowatt.application.useCases.company;
 
-import br.com.corecode.msecowatt.application.exceptions.NotFound;
+import br.com.corecode.msecowatt.application.exceptions.NotFoundException;
 import br.com.corecode.msecowatt.domain.entity.Company;
 import br.com.corecode.msecowatt.domain.repository.CompanyRepository;
 
@@ -13,7 +13,7 @@ public class DeleteCompanyUseCase {
     }
 
     public void execute(String id) {
-        Company company = repository.findById(id).orElseThrow(() -> new NotFound("Company not found"));
+        Company company = repository.findById(id).orElseThrow(() -> new NotFoundException("Company not found"));
 
         repository.delete(company.getId());
     }

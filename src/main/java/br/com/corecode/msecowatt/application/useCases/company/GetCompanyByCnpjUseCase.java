@@ -1,6 +1,6 @@
 package br.com.corecode.msecowatt.application.useCases.company;
 
-import br.com.corecode.msecowatt.application.exceptions.NotFound;
+import br.com.corecode.msecowatt.application.exceptions.NotFoundException;
 import br.com.corecode.msecowatt.application.useCases.company.dto.CompanyOutput;
 import br.com.corecode.msecowatt.domain.entity.Company;
 import br.com.corecode.msecowatt.domain.repository.CompanyRepository;
@@ -14,7 +14,7 @@ public class GetCompanyByCnpjUseCase {
     }
 
     public CompanyOutput execute(String cnpj) {
-        Company company = repository.findByCnpj(cnpj).orElseThrow(() -> new NotFound("Company not found"));
+        Company company = repository.findByCnpj(cnpj).orElseThrow(() -> new NotFoundException("Company not found"));
 
         return new CompanyOutput(
                 company.getId(),

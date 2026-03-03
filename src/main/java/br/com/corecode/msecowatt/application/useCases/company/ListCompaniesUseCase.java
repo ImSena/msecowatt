@@ -14,12 +14,10 @@ public class ListCompaniesUseCase {
     }
 
     public List<CompanyOutput> execute() {
-        List<CompanyOutput> companies = repository.findAll()
+        return repository.findAll()
                 .stream()
                 .map(company -> new CompanyOutput(company.getId(), company.getName(), company.getCnpj().getValue()))
                 .toList()
         ;
-
-        return companies;
     }
 }
