@@ -11,6 +11,9 @@ public class User {
     private final Set<Role> roles;
     private LocalDateTime createdAt;
 
+    public User() {
+    }
+
     public User(String id, String username, String password, Set<Role> roles) {
         this.id = id;
         this.username = username;

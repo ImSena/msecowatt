@@ -19,6 +19,12 @@ public class Role {
         this.createdAt = LocalDateTime.now();
     }
 
+    public static Role restore(String id, String name){
+        Role role = new Role(id, name);
+        role.createdAt = LocalDateTime.now();
+        return role;
+    }
+
     public String getId() {
         return id;
     }
