@@ -1,11 +1,17 @@
 package br.com.corecode.msecowatt.infrastructure.config;
 
+import br.com.corecode.msecowatt.application.useCases.auth.AuthenticateUserUseCase;
 import br.com.corecode.msecowatt.application.useCases.company.*;
 import br.com.corecode.msecowatt.application.useCases.energyReading.*;
+import br.com.corecode.msecowatt.application.useCases.user.CreateUserUseCase;
 import br.com.corecode.msecowatt.domain.repository.CompanyRepository;
 import br.com.corecode.msecowatt.domain.repository.EnergyReadingRepository;
+import br.com.corecode.msecowatt.domain.repository.RoleRepository;
+import br.com.corecode.msecowatt.domain.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
 
 @Configuration
 public class UseCaseConfig {
@@ -74,5 +80,15 @@ public class UseCaseConfig {
     @Bean
     public DeleteEnergyReading deleteEnergyReading(EnergyReadingRepository repository) {
         return new DeleteEnergyReading(repository);
+    }
+
+    @Bean
+    public AuthenticateUserUseCase authenticateUserUseCase(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, JwtEncoder jwtEncoder) {
+        return new AuthenticateUserUseCase(userRepository, bCryptPasswordEncoder, jwtEncoder);
+    }
+
+    @Bean
+    public CreateUserUseCase createUserUseCase(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        return new CreateUserUseCase(userRepository, roleRepository, bCryptPasswordEncoder);
     }
 }
