@@ -8,6 +8,7 @@ import br.com.corecode.msecowatt.domain.entity.Role;
 import br.com.corecode.msecowatt.domain.entity.User;
 import br.com.corecode.msecowatt.domain.repository.RoleRepository;
 import br.com.corecode.msecowatt.domain.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
@@ -17,12 +18,12 @@ import java.util.stream.Collectors;
 public class CreateUserUseCase {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public CreateUserUseCase(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public CreateUserUseCase(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public UserOutput execute(CreateUserInput input) {
@@ -36,7 +37,7 @@ public class CreateUserUseCase {
                     .orElseThrow(() -> new NotFoundException("Role not found"))
                 ).collect(Collectors.toSet());
 
-        String hashedPassword = passwordEncoder.encode(input.password());
+        String hashedPassword = bCryptPasswordEncoder.encode(input.password());
 
         User user = new User(
                 null,

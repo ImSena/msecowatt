@@ -3,10 +3,12 @@ package br.com.corecode.msecowatt.infrastructure.persistence.mongo.repository.ro
 import br.com.corecode.msecowatt.domain.entity.Role;
 import br.com.corecode.msecowatt.domain.repository.RoleRepository;
 import br.com.corecode.msecowatt.infrastructure.persistence.mongo.mapper.RoleMongoMapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class RoleMongoRepositoryAdapter implements RoleRepository {
 
     private final SpringDataRoleMongoRepository repository;
