@@ -1,13 +1,11 @@
 package br.com.corecode.msecowatt.infrastructure.config;
 
+import br.com.corecode.msecowatt.application.useCases.alert.CreateAlertUseCase;
 import br.com.corecode.msecowatt.application.useCases.auth.AuthenticateUserUseCase;
 import br.com.corecode.msecowatt.application.useCases.company.*;
 import br.com.corecode.msecowatt.application.useCases.energyReading.*;
 import br.com.corecode.msecowatt.application.useCases.user.CreateUserUseCase;
-import br.com.corecode.msecowatt.domain.repository.CompanyRepository;
-import br.com.corecode.msecowatt.domain.repository.EnergyReadingRepository;
-import br.com.corecode.msecowatt.domain.repository.RoleRepository;
-import br.com.corecode.msecowatt.domain.repository.UserRepository;
+import br.com.corecode.msecowatt.domain.repository.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -90,5 +88,10 @@ public class UseCaseConfig {
     @Bean
     public CreateUserUseCase createUserUseCase(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         return new CreateUserUseCase(userRepository, roleRepository, bCryptPasswordEncoder);
+    }
+
+    @Bean
+    public CreateAlertUseCase createAlertUseCase(AlertRepository alertRepository, CompanyRepository companyRepository) {
+        return new CreateAlertUseCase(alertRepository, companyRepository);
     }
 }
