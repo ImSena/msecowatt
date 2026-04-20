@@ -21,6 +21,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
+      - name: "Criar chaves para os testes"
+        run: |
+          echo "${{ secrets.APP_PUB }}" > src/main/resources/app.pub
+          echo "${{ secrets.APP_KEY }}" > src/main/resources/app.key
+
       - name: Rodar Testes e Build
         run: mvn clean package
 
