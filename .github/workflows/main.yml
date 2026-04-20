@@ -10,6 +10,13 @@ jobs:
   build-and-test:
     name: Build e Testes Automatizados
     runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
@@ -21,8 +28,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: "Criar chaves para os testes"
+      - name: Criar chaves para os testes
         run: |
+          mkdir -p src/main/resources
           echo "${{ secrets.APP_PUB }}" > src/main/resources/app.pub
           echo "${{ secrets.APP_KEY }}" > src/main/resources/app.key
 
@@ -35,6 +43,9 @@ jobs:
     if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
       - name: Simular Deploy Staging
         run: |
           echo "Iniciando deploy no ambiente de STAGING..."
@@ -47,6 +58,15 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Criar chaves para o Docker Build
+        run: |
+          mkdir -p src/main/resources
+          echo "${{ secrets.APP_PUB }}" > src/main/resources/app.pub
+          echo "${{ secrets.APP_KEY }}" > src/main/resources/app.key
+
       - name: Simular Deploy Produção
         run: |
           echo "Iniciando deploy no ambiente de PRODUÇÃO..."
