@@ -1,0 +1,50 @@
+name: CI/CD Pipeline - EcoWatt
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+jobs:
+  build-and-test:
+    name: Build e Testes Automatizados
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Rodar Testes e Build
+        run: mvn clean package
+
+  deploy-staging:
+    name: Deploy em Staging
+    needs: build-and-test
+    if: github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simular Deploy Staging
+        run: |
+          echo "Iniciando deploy no ambiente de STAGING..."
+          echo "Simulando push da imagem Docker e restart do serviço..."
+          echo "Deploy Staging finalizado com sucesso!"
+
+  deploy-production:
+    name: Deploy em Produção
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simular Deploy Produção
+        run: |
+          echo "Iniciando deploy no ambiente de PRODUÇÃO..."
+          echo "Gerando imagem final de produção:"
+          docker build -t msecowatt-prod .
+          echo "Deploy Produção finalizado com sucesso!"
