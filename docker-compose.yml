@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb-ecowatt
+    restart: always
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - ecowatt-network
+
+  api-java:
+    build: .
+    container_name: api-java-ecowatt
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/ecowatt
+    depends_on:
+      - mongodb
+    networks:
+      - ecowatt-network
+
+volumes:
+  mongo_data:
+
+networks:
+  ecowatt-network:
+    driver: bridge
