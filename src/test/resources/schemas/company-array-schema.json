@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Contrato da Lista de Empresas",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "name": { "type": "string" },
+      "cnpj": { "type": "string" }
+    },
+    "required": ["id", "name", "cnpj"]
+  }
+}

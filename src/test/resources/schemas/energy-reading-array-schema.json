@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Contrato da Lista de Leituras",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string" },
+      "companyId": { "type": "string" },
+      "readingDate": { "type": "string", "format": "date" },
+      "consumptionKwh": { "type": "number" },
+      "emissionCo2": { "type": "number" }
+    },
+    "required": ["id", "companyId", "readingDate", "consumptionKwh", "emissionCo2"]
+  }
+}
